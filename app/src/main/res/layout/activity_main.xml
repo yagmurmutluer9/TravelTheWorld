@@ -11,7 +11,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/mapCard"
         android:layout_width="match_parent"
-        android:layout_height="410dp"
+        android:layout_height="310dp"
         android:layout_marginTop="10dp"
         app:cardCornerRadius="8dp"
 
@@ -22,6 +22,13 @@
             android:layout_height="wrap_content">
 
 
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_below="@+id/textView2"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@color/cardview_light_background" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -32,28 +39,43 @@
                 android:textStyle="bold"
                 android:textSize="40sp"/>
 
-            <Button
-                android:id="@+id/button10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Map"
-                android:textColor="@android:color/white"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:background="@drawable/bg1"
-                />
-
         </RelativeLayout>
 
 
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/mapButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mapCard"
+        app:cardCornerRadius="8dp"
+        android:layout_marginTop="10dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Map"
+                android:textSize="26sp"
+
+                />
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/searchCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/mapCard"
-        app:cardCornerRadius="8dp">
+        android:layout_below="@+id/mapButton"
+        app:cardCornerRadius="8dp"
+        android:layout_marginTop="10dp">
 
 
         <LinearLayout
@@ -67,6 +89,7 @@
                 android:layout_width="412dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="26sp"
                 android:text="Where to go?" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -90,7 +113,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Total country count is:"
-
                 android:textColor="#ffffff"
                 android:textSize="24sp" />
 
@@ -109,9 +131,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textView"
+                android:textSize="26sp"
                 android:text="total" />
 
         </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/profileCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/totalCard"
+        app:cardCornerRadius="8dp"
+        android:layout_marginTop="10dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/profile"
+                android:layout_width="412dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="26sp"
+                android:text="Profile" />
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 

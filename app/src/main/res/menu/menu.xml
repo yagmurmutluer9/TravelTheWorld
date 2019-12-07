@@ -10,12 +10,20 @@
         app:showAsAction="never"
         />
     <item
+        android:id="@+id/item5"
+        android:title="Map"
+        app:showAsAction="never"/>
+    <item
         android:id="@+id/item2"
-        android:title="Profile"
+        android:title="Total"
         app:showAsAction="never"
         />
     <item
         android:id="@+id/item3"
         android:title="Search"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/item4"
+        android:title="Profile"
         app:showAsAction="never"/>
 </menu>
