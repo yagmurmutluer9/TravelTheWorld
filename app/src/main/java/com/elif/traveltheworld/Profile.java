@@ -2,6 +2,8 @@ package com.elif.traveltheworld;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,12 +11,32 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class Profile extends AppCompatActivity {
+
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        ArrayList<Item> exampleList = new ArrayList<>();
+        exampleList.add(new Item(R.drawable.ic_fiber, "Turkey"));
+        exampleList.add(new Item(R.drawable.ic_fiber, "Germany"));
+        exampleList.add(new Item(R.drawable.ic_fiber, "USA"));
+
+
+        mRecyclerView = findViewById(R.id.recylerView);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mAdapter = new profileAdapter(exampleList);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
