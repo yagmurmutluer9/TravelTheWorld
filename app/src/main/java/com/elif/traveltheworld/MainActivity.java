@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button where;
@@ -65,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    public void logout(View view){
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(), Login.class));
+        finish();
+
+    }
+
+
     public void openWhere2Go(){
         Intent intent = new Intent(this, Where2Go.class);
         startActivity(intent);

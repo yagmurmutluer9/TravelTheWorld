@@ -1,23 +1,41 @@
 package com.elif.traveltheworld;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Register extends AppCompatActivity {
+    private Button login;
     EditText mFullName, mUsername, mEmail,mPassword, mPhone;
     Button mRegister, mLogin;
     ProgressBar mProgressBar;
-
+    FirebaseAuth fAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+
+        login = (Button) findViewById(R.id.login);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openLogin();
+            }
+        });
 
         mFullName = findViewById(R.id.fullName);
         mUsername = findViewById(R.id.username);
@@ -27,6 +45,13 @@ public class Register extends AppCompatActivity {
         mRegister = findViewById(R.id.register);
         mLogin = findViewById(R.id.login);
         mProgressBar = findViewById(R.id.progressBar);
+        fAuth = FirebaseAuth.getInstance();
+
+
+        if (fAuth.getCurrentUser() != null){
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+        }
 
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,12 +79,33 @@ public class Register extends AppCompatActivity {
                     return;
                 }
 
-                if (password.length() < 4){
-                    mPassword.setError("Password must be greater than 4 characters!");
+                if (password.length() < 6){
+                    mPassword.setError("Password must be equal or greater than 6 characters!");
                     return;
                 }
                 mProgressBar.setVisibility(View.VISIBLE);
+
+                //Registeration
+
+                fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if (task.isSuccessful()){
+                            Toast.makeText(Register.this, "User Created", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        }else{
+                            Toast.makeText(Register.this, "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
             }
         });
+    }
+
+    public void openLogin(){
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
     }
 }
