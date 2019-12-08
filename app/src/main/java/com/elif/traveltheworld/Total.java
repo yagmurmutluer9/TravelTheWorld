@@ -28,6 +28,20 @@ public class Total extends AppCompatActivity {
         exampleList.add(new Item(R.drawable.ic_fiber, "Turkey"));
         exampleList.add(new Item(R.drawable.ic_fiber, "Germany"));
         exampleList.add(new Item(R.drawable.ic_fiber, "USA"));
+        exampleList.add(new Item(R.drawable.ic_fiber, "Turkey"));
+        exampleList.add(new Item(R.drawable.ic_fiber, "Germany"));
+        exampleList.add(new Item(R.drawable.ic_fiber, "USA"));
+        exampleList.add(new Item(R.drawable.ic_fiber, "Turkey"));
+        exampleList.add(new Item(R.drawable.ic_fiber, "Germany"));
+        exampleList.add(new Item(R.drawable.ic_fiber, "USA"));
+        exampleList.add(new Item(R.drawable.ic_fiber, "Turkey"));
+        exampleList.add(new Item(R.drawable.ic_fiber, "Germany"));
+        exampleList.add(new Item(R.drawable.ic_fiber, "USA"));
+        exampleList.add(new Item(R.drawable.ic_fiber, "Turkey"));
+        exampleList.add(new Item(R.drawable.ic_fiber, "Germany"));
+        exampleList.add(new Item(R.drawable.ic_fiber, "USA"));
+
+
 
 
         mRecyclerView = findViewById(R.id.recylerView);
