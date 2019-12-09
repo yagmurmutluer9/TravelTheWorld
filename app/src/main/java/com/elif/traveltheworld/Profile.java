@@ -9,8 +9,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+
+import javax.annotation.Nullable;
 
 public class Profile extends AppCompatActivity {
+    TextView fullName, username, email, password, phone;
+    FirebaseAuth fAuth;
+    FirebaseFirestore fStore;
+    String userID;
 
     private Button edit;
 
@@ -18,6 +32,33 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        fullName = findViewById(R.id.profileNameUser);
+        username = findViewById(R.id.profileUsername);
+        email = findViewById(R.id.profileEmailUser);
+        password = findViewById(R.id.profileEmailUser);
+        phone = findViewById(R.id.profilePhoneUser);
+
+        fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+
+        userID = fAuth.getCurrentUser().getUid();
+
+        DocumentReference documentReference = fStore.collection("users").document(userID);
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                phone.setText(documentSnapshot.getString("phone"));
+                password.setText(documentSnapshot.getString("pWord"));
+                email.setText(documentSnapshot.getString("email"));
+                username.setText(documentSnapshot.getString("uName"));
+                fullName.setText(documentSnapshot.getString("fName"));
+
+
+
+
+            }
+        });
 
 
         edit = (Button) findViewById(R.id.edit);
