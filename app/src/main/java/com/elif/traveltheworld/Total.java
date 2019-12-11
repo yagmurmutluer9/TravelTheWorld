@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -17,6 +20,12 @@ public class Total extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    ArrayList<Item> exampleList = new ArrayList<>();
+    public static Activity MapActivity;
+
+    String value;
+
+
 
 
     @Override
@@ -24,38 +33,33 @@ public class Total extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_total);
 
-        ArrayList<Item> exampleList = new ArrayList<>();
-        exampleList.add(new Item(R.drawable.ic_fiber, "Turkey"));
-        exampleList.add(new Item(R.drawable.ic_fiber, "Germany"));
-        exampleList.add(new Item(R.drawable.ic_fiber, "USA"));
-        exampleList.add(new Item(R.drawable.ic_fiber, "Turkey"));
-        exampleList.add(new Item(R.drawable.ic_fiber, "Germany"));
-        exampleList.add(new Item(R.drawable.ic_fiber, "USA"));
-        exampleList.add(new Item(R.drawable.ic_fiber, "Turkey"));
-        exampleList.add(new Item(R.drawable.ic_fiber, "Germany"));
-        exampleList.add(new Item(R.drawable.ic_fiber, "USA"));
-        exampleList.add(new Item(R.drawable.ic_fiber, "Turkey"));
-        exampleList.add(new Item(R.drawable.ic_fiber, "Germany"));
-        exampleList.add(new Item(R.drawable.ic_fiber, "USA"));
-        exampleList.add(new Item(R.drawable.ic_fiber, "Turkey"));
-        exampleList.add(new Item(R.drawable.ic_fiber, "Germany"));
-        exampleList.add(new Item(R.drawable.ic_fiber, "USA"));
-
-
-
-
         mRecyclerView = findViewById(R.id.recylerView);
-        mRecyclerView.setHasFixedSize(true);
+       // mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mAdapter = new totalAdapter(exampleList);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+        Bundle extras = getIntent().getExtras();
+        if(extras !=null) {
+            value = extras.getString("total");
+        }
+
+        exampleList.add(new Item(R.drawable.ic_fiber, value));
+        mAdapter.notifyDataSetChanged();
+
+
     }
+
+
     @Override
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
