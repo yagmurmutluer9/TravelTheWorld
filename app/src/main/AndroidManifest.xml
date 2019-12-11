@@ -13,10 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".WantBtnActivity"></activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCllkM8gwxlsMNCNJBz8H6acndu5xkoap8" />
-        <activity android:name=".EditProfile"/>
+
+        <activity android:name=".EditProfile" />
         <activity android:name=".Login" />
         <activity android:name=".Register">
             <intent-filter>
