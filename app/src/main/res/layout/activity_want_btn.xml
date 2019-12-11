@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WantBtnActivity">
+
+    <Button
+        android:id="@+id/gmapbtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Show me on Map!"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/wikibtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Let Me Wiki"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gmapbtn" />
+
+    <Button
+        android:id="@+id/wishbtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Add to wısh list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wikibtn" />
+</androidx.constraintlayout.widget.ConstraintLayout>
