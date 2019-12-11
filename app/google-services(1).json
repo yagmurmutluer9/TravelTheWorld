@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "886815846124",
+    "firebase_url": "https://travelerapp-edaec.firebaseio.com",
+    "project_id": "travelerapp-edaec",
+    "storage_bucket": "travelerapp-edaec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:886815846124:android:cf8c00e6c5ac13bb957fc9",
+        "android_client_info": {
+          "package_name": "com.elif.traveltheworld"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "886815846124-traef5o7jkgdb1fesvbs9dcsgqh93j17.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2jNTCMSYAo6SoGfvCqGWLwBlhgb_6D4g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "886815846124-traef5o7jkgdb1fesvbs9dcsgqh93j17.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
