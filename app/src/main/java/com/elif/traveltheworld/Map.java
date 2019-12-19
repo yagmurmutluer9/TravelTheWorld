@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.icu.text.Edits;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,22 +23,31 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.maps.android.data.geojson.GeoJsonLayer;
 import com.google.maps.android.data.geojson.GeoJsonPolygonStyle;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+
+import javax.annotation.Nullable;
 
 public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
 
     static public GoogleMap mMap;
-    private Button wentbutton;
-    private Button wantbutton;
-
+    public static Button wentbutton;
+    public Button wantbutton;
 
     final static HashMap<String, GeoJsonLayer> countries_and_names = new HashMap<>();
 
@@ -50,7 +61,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         mapFragment.getMapAsync(this);
         wentbutton = findViewById(R.id.wentbutton);
         wantbutton = findViewById(R.id.wantbutton);
-        Total.MapActivity =this;
 
 
         new MyThread().execute();
@@ -64,19 +74,15 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         startActivity(intent);
     }
 
-    public void openTotalPage(String c){
-        Intent intent = new Intent(this, Total.class );
-        intent.putExtra("total", c);
-    }
 
 
-    public class MyThread extends AsyncTask<Void, String, HashMap<String, GeoJsonLayer>>
+
+
+    public  class MyThread extends AsyncTask<Void, String, HashMap<String, GeoJsonLayer>>
     {
 
         @Override
         protected HashMap<String, GeoJsonLayer> doInBackground(Void... voids) {
-
-
 
             try {
 
@@ -89,15 +95,20 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                 e.getStackTrace();
             }
 
+
+
             return  countries_and_names;
         }
 
+
+
         @Override
-        protected void onPostExecute(final HashMap<String, GeoJsonLayer> r) {
+        protected void onPostExecute(final HashMap<String, GeoJsonLayer> result) {
 
             try {
 
                 final Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+
 
                 mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
@@ -114,14 +125,14 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                                 @Override
 
                                 public void onClick(View v) {
-                                    if (r.keySet().contains(addresses.get(0).getCountryName())) {
+                                    if (result.keySet().contains(addresses.get(0).getCountryName())) {
 
-                                        GeoJsonLayer layer = r.get(addresses.get(0).getCountryName());
-                                        GeoJsonPolygonStyle polygonStyle = layer.getDefaultPolygonStyle();
-                                        polygonStyle.setPolygonFillColor(getRandomColor());
-                                        polygonStyle.setStrokeWidth(0);
-                                        layer.addLayerToMap();
-                                        openTotalPage(addresses.get(0).getCountryName());
+                                       final GeoJsonLayer layer = result.get(addresses.get(0).getCountryName());
+                                        colorMap(layer);
+                                        ClickMap(layer);
+
+                                        Country.putVisited(addresses.get(0).getCountryName());
+
 
                                     }
 
@@ -196,8 +207,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
 
 
-
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
@@ -207,18 +216,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
 
-    }
 
-
-
-    public ArrayList<String> visitedCountries(String countryName) {
-
-
-        ArrayList<String > visited_countries = new ArrayList<> ();
-
-        visited_countries.add(countryName);
-
-        return  visited_countries;
 
 
     }
@@ -227,6 +225,22 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
     static public int getRandomColor(){
         Random rnd = new Random();
         return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+    }
+
+
+    public void colorMap( GeoJsonLayer layer) {
+
+        GeoJsonPolygonStyle polygonStyle = layer.getDefaultPolygonStyle();
+        polygonStyle.setPolygonFillColor(getRandomColor());
+        polygonStyle.setStrokeWidth(0);
+        layer.addLayerToMap();
+    }
+
+    public void ClickMap(GeoJsonLayer layer) {
+        GeoJsonPolygonStyle polygonStyle = layer.getDefaultPolygonStyle();
+        polygonStyle.setClickable(false);
+
+
     }
 }
 
