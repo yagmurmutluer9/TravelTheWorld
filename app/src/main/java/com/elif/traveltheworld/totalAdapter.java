@@ -1,5 +1,7 @@
 package com.elif.traveltheworld;
 
+import android.app.Activity;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,11 @@ import java.util.ArrayList;
 
 public class totalAdapter extends RecyclerView.Adapter<totalAdapter.ViewHolder> {
     private ArrayList<Item> mExampleList;
+    public  String value;
+
+
+
+
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView mImageView;
         public TextView mCountryName;
@@ -40,6 +47,9 @@ public class totalAdapter extends RecyclerView.Adapter<totalAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder( ViewHolder holder, int position) {
+
+
+
         Item currentItem= mExampleList.get(position);
         holder.mImageView.setImageResource(currentItem.getmImgResource());
         holder.mCountryName.setText(currentItem.getmName());

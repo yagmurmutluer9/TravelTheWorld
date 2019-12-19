@@ -117,50 +117,51 @@ public class Where2Go extends AppCompatActivity implements View.OnClickListener 
         switch (v.getId()) {
 
             case R.id.place_1:
-                goToCountry(btn1.getText().toString());
+                openWantPage(btn1.getText().toString());
+               // goToCountry(btn1.getText().toString());
                 break;
             case R.id.place_2:
-                goToCountry(btn2.getText().toString());
+                openWantPage(btn2.getText().toString());
                 break;
 
             case R.id.place_3:
-                goToCountry(btn3.getText().toString());
+                openWantPage(btn3.getText().toString());
                 break;
 
             case R.id.place_4:
-                goToCountry(btn4.getText().toString());
+                openWantPage(btn4.getText().toString());
                 break;
 
             case R.id.place_5:
-                goToCountry(btn5.getText().toString());
+                openWantPage(btn5.getText().toString());
                 break;
 
             case R.id.place_6:
-                goToCountry(btn6.getText().toString());
+                openWantPage(btn6.getText().toString());
                 break;
 
             case R.id.place_7:
-                goToCountry(btn7.getText().toString());
+                openWantPage(btn7.getText().toString());
                 break;
 
             case R.id.place_8:
-                goToCountry(btn8.getText().toString());
+                openWantPage(btn8.getText().toString());
                 break;
 
             case R.id.place_9:
-                goToCountry(btn9.getText().toString());
+                openWantPage(btn9.getText().toString());
                 break;
 
             case R.id.place_10:
-                goToCountry(btn10.getText().toString());
+                openWantPage(btn10.getText().toString());
                 break;
 
             case R.id.place_11:
-                goToCountry(btn11.getText().toString());
+                openWantPage(btn11.getText().toString());
                 break;
 
             case R.id.place_12:
-                goToCountry(btn12.getText().toString());
+                openWantPage(btn12.getText().toString());
                 break;
 
             case R.id.place_13:
@@ -202,4 +203,12 @@ public class Where2Go extends AppCompatActivity implements View.OnClickListener 
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUri));
         this.startActivity(intent);
     }
+
+
+    public void openWantPage(String country){
+        Intent intent = new Intent(this, WantBtnActivity.class );
+        intent.putExtra("Key", country);
+        startActivity(intent);
+    }
+
 }

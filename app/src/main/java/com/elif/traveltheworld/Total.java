@@ -7,23 +7,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SearchRecentSuggestionsProvider;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Total extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    ArrayList<Item> exampleList = new ArrayList<>();
-    public static Activity MapActivity;
+    final ArrayList<Item> exampleList = new ArrayList<>();
 
-    String value;
 
 
 
@@ -33,19 +34,26 @@ public class Total extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_total);
 
+
+
+
+
+
         mRecyclerView = findViewById(R.id.recylerView);
-       // mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mAdapter = new totalAdapter(exampleList);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-        Bundle extras = getIntent().getExtras();
-        if(extras !=null) {
-            value = extras.getString("total");
+
+
+        Iterator<String>  iterator = Country.returnCountries().iterator();
+
+        while (iterator.hasNext()) {
+            String country_name = iterator.next();
+            exampleList.add(new Item(R.drawable.ic_fiber, country_name));
         }
 
-        exampleList.add(new Item(R.drawable.ic_fiber, value));
-        mAdapter.notifyDataSetChanged();
 
 
     }
