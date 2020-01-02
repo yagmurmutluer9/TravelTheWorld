@@ -34,6 +34,7 @@ public class Register extends AppCompatActivity {
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     String userID;
+     public static HashMap<String,Object> user = new HashMap<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,7 +109,6 @@ public class Register extends AppCompatActivity {
                             Toast.makeText(Register.this, "User Created", Toast.LENGTH_SHORT).show();
                             userID = fAuth.getCurrentUser().getUid();
                             DocumentReference documentReference = fStore.collection("users").document(userID);
-                            Map<String,Object> user = new HashMap<>();
                             user.put("fName", fullName);
                             user.put("uName",username);
                             user.put("email",email);
@@ -121,6 +121,7 @@ public class Register extends AppCompatActivity {
 
                                 }
                             });
+
 
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         }else{
