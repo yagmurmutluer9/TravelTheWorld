@@ -97,14 +97,19 @@ public class Where2Go extends AppCompatActivity implements View.OnClickListener 
             startActivity(intent);
         }
         if(id==R.id.item2){
-            Intent intent= new Intent(Where2Go.this, Total.class);
+            Intent intent= new Intent(Where2Go.this, Map.class);
             startActivity(intent);
         }
         if(id==R.id.item3){
-            Intent intent= new Intent(Where2Go.this, Where2Go.class);
+            Intent intent= new Intent(Where2Go.this, Total.class);
             startActivity(intent);
         }
         if(id==R.id.item4){
+            Intent intent= new Intent(Where2Go.this, Where2Go.class);
+            startActivity(intent);
+        }
+
+        if(id==R.id.item5){
             Intent intent= new Intent(Where2Go.this, Profile.class);
             startActivity(intent);
         }

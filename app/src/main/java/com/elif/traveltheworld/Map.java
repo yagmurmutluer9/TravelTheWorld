@@ -187,17 +187,18 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
             startActivity(intent);
         }
         if(id==R.id.item2){
-            Intent intent= new Intent(Map.this, Total.class);
+            Intent intent= new Intent(Map.this, Map.class);
             startActivity(intent);
         }
         if(id==R.id.item3){
-            Intent intent= new Intent(Map.this, Where2Go.class);
+            Intent intent= new Intent(Map.this, Total.class);
             startActivity(intent);
         }
         if(id==R.id.item4){
-            Intent intent= new Intent(Map.this, Profile.class);
+            Intent intent= new Intent(Map.this, Where2Go.class);
             startActivity(intent);
         }
+
         if(id==R.id.item5){
             Intent intent= new Intent(Map.this, Profile.class);
             startActivity(intent);

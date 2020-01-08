@@ -93,14 +93,19 @@ public class Profile extends AppCompatActivity {
             startActivity(intent);
         }
         if(id==R.id.item2){
-            Intent intent= new Intent(Profile.this, Total.class);
+            Intent intent= new Intent(Profile.this, Map.class);
             startActivity(intent);
         }
         if(id==R.id.item3){
-            Intent intent= new Intent(Profile.this, Where2Go.class);
+            Intent intent= new Intent(Profile.this, Total.class);
             startActivity(intent);
         }
         if(id==R.id.item4){
+            Intent intent= new Intent(Profile.this, Where2Go.class);
+            startActivity(intent);
+        }
+
+        if(id==R.id.item5){
             Intent intent= new Intent(Profile.this, Profile.class);
             startActivity(intent);
         }
