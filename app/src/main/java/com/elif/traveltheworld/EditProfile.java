@@ -4,30 +4,43 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
 
 
 public class EditProfile extends AppCompatActivity {
+    private static final String TAG = "EditProfileActivity";
     ImageView imgEditProfile;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     String userID;
+    Button save;
+    String mProfileUrl;
 
-    String DISPLAY_NAME= null;
-    String PROFILE_IMAGE_URL= null;
-
-    int TAKE_IMAGE_CODE = 10001;
-
+    private Uri resultUri;
 
 
     @Override
@@ -35,9 +48,82 @@ public class EditProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
+        DocumentReference documentReference = fStore.collection("users").document(userID);
         imgEditProfile = findViewById(R.id.imgEditProfile);
+        save = findViewById(R.id.save);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
+
+        fAuth = FirebaseAuth.getInstance();
+        userID = fAuth.getCurrentUser().getUid();
+
+
+        imgEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent,1);
+            }
+        });
     }
+
+
+    private void savedUserInformation(){
+
+        if(resultUri !=null){
+            StorageReference filePath = FirebaseStorage.getInstance().getReference().child("profileImages").child(userID);
+            Bitmap bitmap = null;
+
+            final DocumentReference documentReference = FirebaseFirestore.getInstance().
+                    collection("users").
+                    document();
+            try {
+                bitmap= MediaStore.Images.Media.getBitmap(getApplication().getContentResolver(), resultUri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            ByteArrayOutputStream baos= new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG,20, baos);
+            byte[] data= baos.toByteArray();
+            UploadTask uploadTask= filePath.putBytes(data);
+
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    finish();
+                    return;
+                }
+            });
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Task<Uri> downloadUrl = taskSnapshot.getMetadata().getReference().getDownloadUrl();
+
+                    HashMap newImage = new HashMap();
+                    newImage.put("profileImageUrl", downloadUrl.toString());
+
+                    documentReference.set(newImage);
+
+                    finish();
+                    return;
+
+
+
+
+
+                }
+            });
+        }else {
+            finish();
+        }
+    }
+
 
 
     @Override
@@ -69,24 +155,23 @@ public class EditProfile extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void handleImageClick(View view) {
 
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if(intent.resolveActivity(getPackageManager()) != null){
-            startActivityForResult(intent,TAKE_IMAGE_CODE);
-        }
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == TAKE_IMAGE_CODE){
-
-            switch (requestCode){
-                case RESULT_OK:
-                    Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            }
+        if(requestCode == 1 && resultCode == Activity.RESULT_OK){
+            final Uri imageUri= data.getData();
+            resultUri = imageUri;
+            imgEditProfile.setImageURI(resultUri);
 
         }
     }
+
+
+
+
+
+
+
 }

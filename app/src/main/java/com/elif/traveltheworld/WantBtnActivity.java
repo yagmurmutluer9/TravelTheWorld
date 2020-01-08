@@ -13,7 +13,6 @@ public class WantBtnActivity extends AppCompatActivity  implements View.OnClickL
 
     Button mapbtn;
     Button wikibtn;
-    Button wishbtn;
     String value;
 
 
@@ -26,8 +25,6 @@ public class WantBtnActivity extends AppCompatActivity  implements View.OnClickL
         mapbtn.setOnClickListener(this);
         wikibtn = findViewById(R.id.wikibtn);
         wikibtn.setOnClickListener(this);
-        wishbtn = findViewById(R.id.wishbtn);
-        wishbtn.setOnClickListener(this);
 
         Bundle extras = getIntent().getExtras();
         if(extras !=null) {
@@ -57,9 +54,6 @@ public class WantBtnActivity extends AppCompatActivity  implements View.OnClickL
                 Intent intent2 = new Intent(Intent.ACTION_VIEW, Uri.parse(wikiUri));
                 this.startActivity(intent2);
 
-                break;
-            case R.id.wishbtn:
-                Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
                 break;
 
 
