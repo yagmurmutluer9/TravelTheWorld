@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Profile">
+    tools:context=".EditProfile">
     <androidx.cardview.widget.CardView
         android:id="@+id/cardProfile"
         android:layout_width="match_parent"
@@ -17,12 +17,13 @@
             >
 
             <ImageView
-                android:id="@+id/imgProfile"
+                android:id="@+id/imgEditProfile"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:padding="2dp"
                 android:layout_centerVertical="true"
                 android:src="@drawable/profile"
+                android:onClick="handleImageClick"
                 />
 
             <EditText
