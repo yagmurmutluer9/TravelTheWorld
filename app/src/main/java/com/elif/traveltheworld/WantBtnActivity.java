@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class WantBtnActivity extends AppCompatActivity  implements View.OnClickListener{
 
     Button mapbtn;
@@ -28,6 +30,7 @@ public class WantBtnActivity extends AppCompatActivity  implements View.OnClickL
         mapbtn.setOnClickListener(this);
         wikibtn = findViewById(R.id.wikibtn);
         wikibtn.setOnClickListener(this);
+
 
         Bundle extras = getIntent().getExtras();
         if(extras !=null) {
@@ -60,10 +63,10 @@ public class WantBtnActivity extends AppCompatActivity  implements View.OnClickL
                 break;
 
 
-
         }
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -96,7 +99,17 @@ public class WantBtnActivity extends AppCompatActivity  implements View.OnClickL
             Intent intent= new Intent(WantBtnActivity.this, Profile.class);
             startActivity(intent);
         }
+
+        if(id==R.id.item6) {
+
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(getApplicationContext(), Login.class));
+            finish();
+
+
+        }
         return super.onOptionsItemSelected(item);
     }
 
 }
+
