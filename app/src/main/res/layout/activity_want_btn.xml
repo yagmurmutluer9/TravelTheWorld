@@ -4,18 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg2"
     tools:context=".WantBtnActivity">
 
     <Button
         android:id="@+id/gmapbtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/cardview_light_background"
-        android:text="go to the google maps"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Show me on Map!"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,25 +20,10 @@
         android:id="@+id/wikibtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@color/cardview_light_background"
-        android:text="go to the wikipedia"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:text="Let Me Wiki"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gmapbtn" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="600dp"
-        android:layout_height="500dp"
-        app:layout_constraintBottom_toTopOf="@+id/gmapbtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.73"
-        app:srcCompat="@mipmap/ic_picture_foreground" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

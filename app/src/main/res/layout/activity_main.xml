@@ -41,25 +41,24 @@
 
             <Button
                 android:id="@+id/logout"
-                android:layout_width="50dp"
+                android:layout_width="51dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="3dp"
                 android:layout_toStartOf="@+id/textView2"
-                android:background="@drawable/ic_close_black_24dp"
-                android:onClick="logout" />
+                android:onClick="logout"
+                android:background="@drawable/ic_subdirectory_arrow_left_black_24dp" />
 
         </RelativeLayout>
 
 
     </androidx.cardview.widget.CardView>
-
     <androidx.cardview.widget.CardView
         android:id="@+id/mapButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mapCard"
-        android:layout_marginTop="10dp"
-        app:cardCornerRadius="8dp">
+        app:cardCornerRadius="8dp"
+        android:layout_marginTop="5dp">
 
 
         <LinearLayout
@@ -117,6 +116,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg1">
+
+
 
 
             <Button

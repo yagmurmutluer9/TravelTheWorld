@@ -126,6 +126,15 @@ public class MainActivity extends AppCompatActivity {
             Intent intent= new Intent(MainActivity.this, Profile.class);
             startActivity(intent);
         }
+
+        if(id==R.id.item6) {
+
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(), Login.class));
+                finish();
+
+
+        }
         return super.onOptionsItemSelected(item);
     }
 }

@@ -23,6 +23,7 @@
                 android:padding="2dp"
                 android:layout_centerVertical="true"
                 android:src="@drawable/profile"
+                android:onClick="handleImageClick"
                 />
 
             <EditText
@@ -69,10 +70,10 @@
         android:layout_marginTop="7dp">
 
         <EditText
-            android:id="@+id/editPhone"
+            android:id="@+id/editPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone Number"
+            android:hint="Password"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -105,10 +106,10 @@
         android:layout_marginTop="7dp">
 
         <EditText
-            android:id="@+id/editpWord"
+            android:id="@+id/editPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="Phone Number"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -127,8 +128,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg1"
-            android:textColor="@color/cardview_light_background"
+            android:clickable="true"
             android:text="save changes"
+            android:textColor="@color/cardview_light_background"
             android:textSize="20sp" />
     </androidx.cardview.widget.CardView>
 
